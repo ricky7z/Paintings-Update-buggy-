@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Chroma</title>
+  <link rel="stylesheet" href="styles.css">
+
+
+
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="custom-order.html">Custom Order</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Administrator</a></li>
+       
+<li>
+    <label class="switch">
+        <input type="checkbox" id="dark-mode-toggle">
+        <span class="slider"></span>
+    </label>
+</li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="Backvid2.webm" type="video/webm">
+      <source src="backvid2.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+  </video>
+  
+    <div class="hero-content">
+      <h1>Welcome to Chroma</h1>
+      <p>Discover beautiful art or create your own custom painting.</p>
+      <a href="gallery.html" class="btn">Explore Gallery</a>
+    </div>
+  </section>
+  
+
+  <section class="highlighted-gallery">
+    <h2>Featured Artworks</h2>
+    <div class="gallery-grid">
+      <!-- Gallery items will be dynamically loaded here -->
+
+      
+    </div>
+  </section>
+
+ <!-- The Modal -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImage">
+  <div id="caption"></div>
+</div>
+
+  
+
+  <footer>
+    <p>&copy; 2024 Chroma All rights reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

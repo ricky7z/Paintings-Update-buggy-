@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Order - Chroma</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+
+<!-- Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js"></script>
+
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="custom-order.html" class="active">Custom Order</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+            <label class="switch">
+              <input type="checkbox" id="dark-mode-toggle">
+              <span class="slider round"></span>
+            </label>
+          </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="custom-order">
+    <h1 style="text-align: center;">Create Your Custom Painting</h1>
+    <form action="https://formspree.io/f/meojkvqr" method="post" class="enhanced-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your name">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email">
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input 
+          type="tel" 
+          id="phone" 
+          name="phone" 
+          placeholder="Enter your phone number" 
+          required 
+          pattern="^(?:\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9})$" 
+          title="Please enter a valid phone number (e.g. +1234567890, 123-456-7890, (123) 456-7890, etc.)"
+        oninput="validatePhoneNumber(this)" 
+        >
+      </div>
+      
+      
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required placeholder="Describe your custom painting"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="reference-image">Reference Image (optional):</label>
+        <a href="https://forms.gle/iPaeFcEXgXpyPpQm9" target="_blank" class="btn">Upload your reference image here</a>
+      </div>
+      
+      
+
+      <div class="form-group">
+        <label for="size">Choose Size:</label>
+        <select id="size" name="size">
+          <option value="" disabled selected>Select size</option>
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn">Submit Order</button>
+    </form>
+  </section>
+  <script src="app.js"></script>
+
+
+
+  <script>
+    // Firebase configuration (replace with your own config)
+    var firebaseConfig = {
+      apiKey: "AIzaSyDFKPiuEPSujVh0iW9wDII5r8OQ4L-BE_8",
+    authDomain: "database-ca669.firebaseapp.com",
+    projectId: "database-ca669",
+    storageBucket: "database-ca669.appspot.com",
+    messagingSenderId: "720168113334",
+    appId: "1:720168113334:web:0700df6a3d95ed26260217"
+    };
+  
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  
+    // Initialize Firestore and Storage
+    var db = firebase.firestore();
+    var storage = firebase.storage();
+  
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+  
+      // Get form values
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var phone = document.getElementById('phone').value;
+      var description = document.getElementById('description').value;
+      var size = document.getElementById('size').value;
+      
+      // Get the file input
+      var fileInput = document.querySelector('input[type="file"]');
+      var file = fileInput.files[0];
+      
+      // Create a storage reference with a unique filename
+      var storageRef = storage.ref('images/' + new Date().getTime() + '_' + file.name);
+  
+      // Upload file to Firebase Storage
+      storageRef.put(file).then(function(snapshot) {
+        return snapshot.ref.getDownloadURL(); // Get the uploaded file's URL
+      }).then(function(downloadURL) {
+        // Save the order data along with the image URL to Firestore
+        return db.collection('orders').add({
+          name: name,
+          email: email,
+          phone: phone,
+          description: description,
+          size: size,
+          imageUrl: downloadURL,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      }).then(function() {
+        alert('Order submitted successfully!');
+      }).catch(function(error) {
+        console.error('Error submitting order: ', error);
+      });
+    });
+  </script>
+  
+
+  <footer>
+    <p>&copy; 2024 Chroma. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Chroma</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                
+                <!-- <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="custom-order.html">Custom Order</a></li>
+                <li><a href="contact.html">Contact</a></li> -->
+                
+                <li>
+                    <label class="switch">
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </li>
+                
+                <!-- Logout Button -->
+                <li>
+                    <button class="btn logout-btn" onclick="logout()">Logout</button>
+                </li>
+                <li>
+                    <a href="gallery.html">
+                        <button class="btn logout-btn">View Gallery</button>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </header>
+
+      
+
+      <div class="dashboard-container">
+        <h1>Admin Dashboard</h1>
+        <div class="dashboard-grid">
+            <div class="dashboard-item">
+                <h2>Form Submissions</h2>
+                <p>View all form submissions</p>
+                <button class="btn" onclick="loadIframe('formspree-iframe', 'https://formspree.io/forms')">View Submissions</button>
+            </div>
+            <div class="dashboard-item">
+                <h2>Manage Images</h2>
+                <p>Upload or remove images</p>
+                <button class="btn" onclick="loadIframe('google-forms', 'https://docs.google.com/forms/d/1bxCxj3nohb3KBzyN-ok_0bGfX2nnP68FK-QZ67BFlAY/edit?pli=1#responses')">Manage Images</button>
+            </div>
+            <div class="dashboard-item">
+                <h2>Google Drive</h2>
+                <p>Access your Google Drive</p>
+                <button class="btn" onclick="loadIframe('google-drive', 'https://drive.google.com/drive/folders/YOUR_FOLDER_ID_HERE')">Open Google Drive</button>
+            </div>
+        </div>
+    
+        <div id="iframe-container" style="margin-top: 30px;">
+            <iframe id="formspree-iframe" src="" style="width: 100%; height: 500px; border: none; display: none;"></iframe>
+            <iframe id="google-forms" src="" style="width: 100%; height: 500px; border: none; display: none;"></iframe>
+            <iframe id="google-drive" src="" style="width: 100%; height: 500px; border: none; display: none;"></iframe>
+        </div>
+    </div>
+    <body>
+        <h1>Upload New Painting</h1>
+<form id="uploadForm" class="enhanced-form">
+    <div class="form-group">
+        <label for="imageUpload">Image:</label>
+        <input type="file" id="imageUpload" accept="image/*" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="imageTitle">Title:</label>
+        <input type="text" id="imageTitle" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="imageDescription">Description:</label>
+        <textarea id="imageDescription" required></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="imagePrice">Price:</label>
+        <input type="text" id="imagePrice" required>
+    </div>
+    
+    <button type="submit">Upload</button>
+</form>
+                   
+        <h2>Uploaded Paintings</h2>
+        <div id="paintingsList"></div>
+    <script>
+        function loadIframe(iframeId, url) {
+            // Hide all iframes first
+            document.getElementById('formspree-iframe').style.display = 'none';
+            document.getElementById('google-forms').style.display = 'none';
+            document.getElementById('google-drive').style.display = 'none';
+    
+            // Display the selected iframe and load the URL
+            const iframe = document.getElementById(iframeId);
+            iframe.style.display = 'block';
+            iframe.src = url;
+        }
+
+    function logout() {
+        // Redirect to the login page or perform any logout logic needed
+        window.location.href = 'admin.html'; // Replace with the correct login page URL
+    }
+    </script>
+
+<script src="admin.js"></script>
+    
+    <script src="app.js"></script>
+    
+</body>
+</html>
+
+
+
+

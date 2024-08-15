@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Chroma</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html" class="active">Gallery</a></li>
+        <li><a href="custom-order.html">Custom Order</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+            <label class="switch">
+              <input type="checkbox" id="dark-mode-toggle">
+              <span class="slider round"></span>
+            </label>
+          </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="gallery">
+    <h1 style="text-align: center";>Gallery</h1>
+    <div class="gallery-grid" >
+      <!-- Gallery items will be dynamically loaded here -->
+    </div>
+
+   
+  </section>
+
+  <!--<h1>Gallery</h1>-->
+  <div class="gallery-grid"></div>
+
+    <!-- The Modal -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImage">
+  <div id="caption"></div>
+</div>
+ 
+
+  <footer>
+    <p>&copy; 2024 Chroma. All rights reserved.</p>
+  </footer>
+  
+  <script src="app.js"></script>
+</body>
+</html>
